@@ -132,7 +132,7 @@ std::vector<Eigen::Vector3d> getPath()
 {
   const double start_angle = M_PI / 2 + (M_PI / 8);
   const double end_angle = M_PI;
-  const double step = 0.01745329;
+  const double step = 0.00087266449;
   std::vector<Eigen::Vector3d> traj;
 
   for (double i = start_angle; i < end_angle; i = i + step)
@@ -243,7 +243,7 @@ int main(int argc, char* argv[])
 
   // Follow the trajectory
 
-  const double publish_period = 0.15;
+  const double publish_period = 0.0075; // must be less than the max_expected_latency parameter
   rclcpp::WallRate rate(1 / publish_period);
 
   // The path needs to be reversed since the last point in the path is where we want to start.
@@ -260,7 +260,7 @@ int main(int argc, char* argv[])
   // Simulated door opening
 
   double door_angle = M_PI / 2;
-  const double step = 0.01745329;  // 1 degree in radian
+  const double step = 0.00087266449;  // 1/20 degree in radian
 
   // Reverse again to so that we follow that path in reverse order.
   std::reverse(path.begin(), path.end());
